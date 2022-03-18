@@ -1,0 +1,62 @@
+set showmatch "括弧入力時の対応する括弧を表示
+
+""#####検索設定#####
+set ignorecase "大文字/小文字の区別なく検索する
+set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
+set wrapscan "検
+
+
+autocmd ColorScheme * highlight Comment ctermfg=22 guifg=#008800
+autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
+
+set clipboard+=unnamed
+
+set encoding=utf-8
+scriptencoding utf-8
+
+" tabのスペースの設定
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+noremap YY "+y<CR>
+noremap <leader>p "+gP<CR>
+noremap XX "+x<CR>
+
+"閉じタグ自動補完
+inoremap <expr> % Lt_Percent_Completion()
+function Lt_Percent_Completion()
+ if matchstr(getline('.'), '.', col('.') -1 ) == ">"
+   return "\%\%\<Left>"
+  else
+    return "\%"
+  end
+endf
+
+"jjを打つことでインサートモード終了
+inoremap <silent> jj <ESC>
+"矢印キーの代用
+imap <C-k> <Up>
+imap <C-j> <Down>
+imap <C-h> <Left>
+imap <C-l> <Right>
+
+"行頭移動(normal mode)
+noremap gh ^
+noremap gl $
+"
+"行頭へ移動
+inoremap <C-a> <C-o>^
+"行末へ移動
+inoremap <C-e> <C-o>$
+
+" カーソルの左右移動で行末から次の行の行頭への移動が可能になる
+set whichwrap=b,s,h,l,<,>,[,],~ "
+
+set tabstop=2 " 画面上でタブ文字が占める幅
+" 行が折り返し表示されていた場合、行単位ではなく表示行単位でカーソルを移動する
+nnoremap j gj
+nnoremap k gk
+nnoremap <down> gj
+nnoremap <up> gk
+
