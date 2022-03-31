@@ -19,8 +19,14 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'L9'
 Plugin 'scrooloose/nerdtree'
 
+" window resize
+Plugin 'simeji/winresizer'
+
 " typescript plugin
 Plugin 'Quramy/tsuquyomi-vue'
+
+" fzf
+Plugin 'junegunn/fzf'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,6 +59,8 @@ set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
 set wrapscan "検
 
+" mapleader
+let mapleader = "\<Space>"
 
 autocmd ColorScheme * highlight Comment ctermfg=22 guifg=#008800
 autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
@@ -92,7 +100,10 @@ imap <C-l> <Right>
 "行頭移動(normal mode)
 noremap gh ^
 noremap gl $
-"
+
+"terminalを開く
+nnoremap <Leader>t :bo term<CR>
+
 "行頭へ移動
 inoremap <C-a> <C-o>^
 "行末へ移動
@@ -149,6 +160,26 @@ nnoremap <C-n> :NERDTree<CR>
 let NERDTreeShowHidden = 1
 " Start NERDTree. If a file is specified, move the cursor to its window.
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
+"""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""
+"fzfの設定
+set rtp+=/usr/local/opt/fzf
+  let g:fzf_buffers_jump = 1
+  nnoremap <Leader>f :FZF<CR>
+  nnoremap <Leader>r :Rg<CR>
+  nnoremap <Leader>fh :<C-u>History<CR>
+  nnoremap <Leader>ft :<C-u>call fzf#vim#tags(expand('<cword>'))<CR>
+  let g:fzf_layout = { 'down': '30%' }
+  let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-j': 'split',
+    \ 'ctrl-l': 'vsplit' }
+
+  augroup vimrc_fzf
+      autocmd!
+      autocmd FileType fzf tnoremap <buffer> <leader>z <Esc>
+  augroup END
 """""""""""""""""""""""""""""""

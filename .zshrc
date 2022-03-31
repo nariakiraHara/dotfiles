@@ -55,6 +55,17 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 bindkey '^g' ghq-fzf
+
+## fbr
+function fbr() {
+  local branches branch
+  branches=$(git --no-pager branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+zle -N fbr
+bindkey '^b' fbr
+
  
 ## エイリアス郡
 alias ll='ls -la'
@@ -82,3 +93,6 @@ export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
  
 export PATH="$GOROOT/bin:$PATH"
+eval "$(rbenv init -)"
+
+export PATH=$HOME/.nodebrew/current/bin:$PATH
