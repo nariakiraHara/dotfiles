@@ -90,12 +90,12 @@ alias gbd='f(){ git branch | grep $1 | xargs git branch -D;  unset -f f; }; f'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
  
  
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
+# export GOENV_ROOT="$HOME/.goenv"
+# export PATH="$GOENV_ROOT/bin:$PATH"
+# eval "$(goenv init -)"
  
-export PATH="$GOROOT/bin:$PATH"
-eval "$(rbenv init -)"
+# export PATH="$GOROOT/bin:$PATH"
+# eval "$(rbenv init -)"
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
